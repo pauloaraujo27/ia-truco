@@ -14,6 +14,20 @@
 <main class="main-content" >
   <div class="container">
     <div class="row justify-content-center">
+      <div class="jogador">
+
+        <div class="cartas">
+          <div class="carta carta-ia" *ngFor="let carta of jogadores[1].cartas">
+            <div class="carta-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row justify-content-center">
       <div class="mesa">
 
         <div class="cartas">
@@ -22,7 +36,7 @@
             <div class="carta" [ngClass]="cartaMesaIa.naipe">
               <div class="carta-body" [ngClass]="cartaMesaIa.naipe">
                   {{cartaMesaIa.numero}} <br><br>
-                  <img width="35" height="35" [src]="'/assets/images/' + cartaMesaIa.naipe + '.png'" />
+                  <img width="30" height="30" [src]="'/assets/images/' + cartaMesaIa.naipe + '.png'" />
               </div>
             </div>
           </div>
@@ -31,7 +45,7 @@
             <div class="carta" [ngClass]="cartaMesaJa.naipe">
               <div class="carta-body" [ngClass]="cartaMesaJa.naipe">
                   {{cartaMesaJa.numero}} <br><br>
-                  <img width="35" height="35" [src]="'/assets/images/' + cartaMesaJa.naipe + '.png'" />
+                  <img width="30" height="30" [src]="'/assets/images/' + cartaMesaJa.naipe + '.png'" />
               </div>
             </div>
           </div>
@@ -49,7 +63,7 @@
           <div class="carta" *ngFor="let carta of jogadores[1].cartas" [ngClass]="carta.naipe" (click)="jogarCarta(carta)">
             <div class="carta-body" [ngClass]="carta.naipe">
                 {{carta.numero}} <br><br>
-               <img width="35" height="35" [src]="'/assets/images/' + carta.naipe + '.png'" />
+               <img width="30" height="30" [src]="'/assets/images/' + carta.naipe + '.png'" />
             </div>
           </div>
         </div>

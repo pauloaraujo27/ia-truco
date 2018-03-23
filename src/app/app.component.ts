@@ -26,6 +26,31 @@ export class AppComponent {
     this.jogadores.push(new Jogador('JA', 'Jogador', this._pegarCartas()));
   }
 
+  jogarCarta(carta: Carta) {
+
+    carta = this.jogadores[1].jogarCarta(carta);
+
+    let jogavel: Carta = null;
+    this.jogadores[0].cartas.forEach(el => {
+      if (carta.valor < el.valor) {
+        jogavel = el;
+      } else if (!jogavel) {
+        jogavel = el;
+      }
+    });
+
+    jogavel = this.jogadores[0].jogarCarta(jogavel);
+
+    if (jogavel.valor > carta.valor) {
+      this.placar.ia++;
+    } else if (jogavel.valor < carta.valor) {
+      this.placar.ja++;
+    }
+
+    this.cartaMesaIa = jogavel;
+    this.cartaMesaJa = carta;
+  }
+
   reiniciar() {
     this._baralho.embaralhar();
 
@@ -40,29 +65,6 @@ export class AppComponent {
       ia : 0,
       ja: 0
     };
-  }
-
-  jogarCarta(carta: Carta) {
-
-    // TODO: quem ganhar volta;
-
-    let jogavel: Carta = null;
-    this.jogadores[0].cartas.forEach(el => {
-      if (carta.valor < el.valor) {
-        jogavel = el;
-      } else if (!jogavel) {
-        jogavel = el;
-      }
-    });
-
-    if (jogavel.valor > carta.valor) {
-      this.placar.ia++;
-    } else if (jogavel.valor < carta.valor) {
-      this.placar.ja++;
-    }
-
-    this.cartaMesaIa = jogavel;
-    this.cartaMesaJa = carta;
   }
 
   private _pegarCartas(): Array<Carta> {

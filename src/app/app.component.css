@@ -18,8 +18,8 @@
 }
 
 .mesa {
-  height: 420px;
-  width: 420px;
+  height: 320px;
+  width: 320px;
   border-radius: 50%;
   border: 15px solid #2e2e2e;
   background: #0b8379;
@@ -30,13 +30,14 @@
 
 .cartas {
   display: block;
+  min-height: 120px;
 }
 
 .cartas .carta {
   cursor: pointer;
   display: inline-block;
-  height: 120px;
-  width: 100px;
+  height: 100px;
+  width: 80px;
   margin: 10px;
   outline: 3px solid #fff;
   border: 2px solid #000;

@@ -14,7 +14,6 @@ export class Jogador {
   jogarCarta(carta: Carta): Carta {
     this.cartas = this.cartas
       .filter(elemento => !elemento.equalsTo(carta));
-
     return carta;
   }
 
