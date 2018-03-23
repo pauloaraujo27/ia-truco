@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-
+import { CartaComponent } from './components/carta/carta.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CartaComponent
   ],
   imports: [
     BrowserModule
