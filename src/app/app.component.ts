@@ -18,6 +18,8 @@ export class AppComponent {
   empate: boolean;
   primeiroPonto: Jogador;
 
+  teste = ['a', 'b', 'c'];
+
   placar = {
     ia: 0,
     ja: 0
@@ -32,6 +34,7 @@ export class AppComponent {
     this._baralho.embaralhar();
     this.jogadores.push(new Jogador('IA', 'boot', this._pegarCartas()));
     this.jogadores.push(new Jogador('JA', 'Jogador', this._pegarCartas()));
+
   }
 
   jogarCarta(carta: Carta) {

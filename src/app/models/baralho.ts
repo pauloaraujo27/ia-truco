@@ -13,13 +13,10 @@ export class Baralho {
     });
 
     this._embaralhar(this._cartas);
-
-    console.log(this._cartas);
   }
 
   public pegarCarta(): Carta {
     const carta = this._cartas[this._cartas.length - 1 ];
-
     return this._cartas.pop();
   }
 
