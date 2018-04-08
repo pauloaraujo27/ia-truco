@@ -15,14 +15,16 @@ export class AppComponent {
   cartaMesaIa: Carta;
   cartaMesaJa: Carta;
   mostrarProxima: boolean;
+  empate: boolean;
+  primeiroPonto: Jogador;
 
   placar = {
-    ia : 0,
+    ia: 0,
     ja: 0
   };
 
   placarGeral = {
-    ia : 0,
+    ia: 0,
     ja: 0
   };
 
@@ -48,26 +50,40 @@ export class AppComponent {
     jogavel = this.jogadores[0].jogarCarta(jogavel);
 
     if (jogavel.valor > carta.valor) {
+      if (this.placar.ia === 0 && this.placar.ja === 0) {
+        this.primeiroPonto = this.jogadores[0];
+      }
       this.placar.ia++;
     } else if (jogavel.valor < carta.valor) {
+      if (this.placar.ia === 0 && this.placar.ja === 0) {
+        this.primeiroPonto = this.jogadores[1];
+      }
       this.placar.ja++;
+    } else {
+      this.empate = true;
     }
 
-    if (this.placar.ia > 1) {
-      this.mostrarProxima = true;
-    }
-    if (this.placar.ja > 1 ) {
-      this.mostrarProxima = true;
+    // if para pontuar caso haja empate, no caso pontua o que fez o primeiro ponto
+    if (this.empate && (this.placar.ia > 0 || this.placar.ja > 0) ) {
+      if (this.primeiroPonto === this.jogadores[0] ) {
+        this.placar.ia++;
+      } else if (this.primeiroPonto === this.jogadores[1]) {
+        this.placar.ja++;
+      }
     }
 
+    if (this.placar.ia > 1 || this.placar.ja > 1) {
+      this.mostrarProxima = true;
+    }
     this.cartaMesaIa = jogavel;
     this.cartaMesaJa = carta;
   }
 
   proxima() {
     this._baralho.embaralhar();
-
+    this.empate = false;
     this.mostrarProxima = false;
+    this.primeiroPonto = null;
 
     this.cartaMesaIa = null;
     this.cartaMesaJa = null;
@@ -77,20 +93,26 @@ export class AppComponent {
     });
 
     if (this.placar.ia > this.placar.ja) {
-      this.placarGeral.ia++;
+      this.placarGeral.ia += 2;
     } else {
-      this.placarGeral.ja++;
+      this.placarGeral.ja += 2;
     }
-    this.placar = {
-      ia : 0,
-      ja: 0
-    };
+
+    if (this.placarGeral.ia >= 12 || this.placarGeral.ja >= 12) {
+      this.reiniciar();
+    } else {
+      this.placar = {
+        ia: 0,
+        ja: 0
+      };
+    }
   }
 
 
   reiniciar() {
     this._baralho.embaralhar();
-
+    this.primeiroPonto = null;
+    this.empate = false;
     this.cartaMesaIa = null;
     this.cartaMesaJa = null;
 
@@ -99,11 +121,11 @@ export class AppComponent {
     });
 
     this.placar = {
-      ia : 0,
+      ia: 0,
       ja: 0
     };
     this.placarGeral = {
-      ia : 0,
+      ia: 0,
       ja: 0
     };
   }
