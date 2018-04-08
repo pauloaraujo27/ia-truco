@@ -7,9 +7,21 @@
     Jogador: {{placar.ja}} <br>
     IA: {{placar.ia}}
   </div>
-  <button class="mt-3 btn btn-outline-light btn-block" (click)="reiniciar()">Reiniciar</button>
+  
+  <button  type="button" class="mt-3 btn btn-outline-light btn-block" (click)="reiniciar()">Reiniciar</button>
+  <button type="button" class="mt-3 btn btn-outline-light btn-block" (click)="proxima()" *ngIf="mostrarProxima">Proxima</button>
 </aside>
 
+
+<aside class="placarGeral">
+  <div class="head">
+    Placar Geral
+  </div>
+  <div class="body">
+    Jogador: {{placarGeral.ja}} 
+    IA: {{placarGeral.ia}}
+  </div>
+</aside>
 
 <main class="main-content" >
   <div class="container">

@@ -14,8 +14,14 @@ export class AppComponent {
   jogadores = new Array<Jogador>();
   cartaMesaIa: Carta;
   cartaMesaJa: Carta;
+  mostrarProxima: boolean;
 
   placar = {
+    ia : 0,
+    ja: 0
+  };
+
+  placarGeral = {
     ia : 0,
     ja: 0
   };
@@ -47,9 +53,40 @@ export class AppComponent {
       this.placar.ja++;
     }
 
+    if (this.placar.ia > 1) {
+      this.mostrarProxima = true;
+    }
+    if (this.placar.ja > 1 ) {
+      this.mostrarProxima = true;
+    }
+
     this.cartaMesaIa = jogavel;
     this.cartaMesaJa = carta;
   }
+
+  proxima() {
+    this._baralho.embaralhar();
+
+    this.mostrarProxima = false;
+
+    this.cartaMesaIa = null;
+    this.cartaMesaJa = null;
+
+    this.jogadores.forEach(jogador => {
+      jogador.cartas = this._pegarCartas();
+    });
+
+    if (this.placar.ia > this.placar.ja) {
+      this.placarGeral.ia++;
+    } else {
+      this.placarGeral.ja++;
+    }
+    this.placar = {
+      ia : 0,
+      ja: 0
+    };
+  }
+
 
   reiniciar() {
     this._baralho.embaralhar();
@@ -65,7 +102,13 @@ export class AppComponent {
       ia : 0,
       ja: 0
     };
+    this.placarGeral = {
+      ia : 0,
+      ja: 0
+    };
   }
+
+
 
   private _pegarCartas(): Array<Carta> {
     const array = [];
