@@ -11,14 +11,15 @@ import { Carta } from './models/carta';
 export class AppComponent {
 
   private _baralho: Baralho = new Baralho;
+
+
   jogadores = new Array<Jogador>();
   cartaMesaIa: Carta;
   cartaMesaJa: Carta;
+  cartaSelecionada: Carta;
   mostrarProxima: boolean;
   empate: boolean;
   primeiroPonto: Jogador;
-
-  teste = ['a', 'b', 'c'];
 
   placar = {
     ia: 0,
@@ -30,11 +31,12 @@ export class AppComponent {
     ja: 0
   };
 
+  intervalId;
+
   constructor() {
     this._baralho.embaralhar();
     this.jogadores.push(new Jogador('IA', 'boot', this._pegarCartas()));
     this.jogadores.push(new Jogador('JA', 'Jogador', this._pegarCartas()));
-
   }
 
   jogarCarta(carta: Carta) {
@@ -111,6 +113,9 @@ export class AppComponent {
     }
   }
 
+  selecionarCarta(carta: Carta) {
+    this.cartaSelecionada = carta;
+  }
 
   reiniciar() {
     this._baralho.embaralhar();

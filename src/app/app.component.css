@@ -68,6 +68,11 @@
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 }
 
+.cartas .carta.selecionada {
+  height: 120px;
+  width: 100px;
+}
+
 .carta.Copas,
 .carta.Ouros {
   border-color: red !important;

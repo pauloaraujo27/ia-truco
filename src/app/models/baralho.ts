@@ -17,7 +17,7 @@ export class Baralho {
 
   public pegarCarta(): Carta {
     const carta = this._cartas[this._cartas.length - 1 ];
-    return this._cartas.pop();
+    return this._cartas.shift();
   }
 
   private _olharValor(naipe: string, numero: string ): number {
