@@ -37,6 +37,7 @@ export class AppComponent {
     this._baralho.embaralhar();
     this.jogadores.push(new Jogador('IA', 'boot', this._pegarCartas()));
     this.jogadores.push(new Jogador('JA', 'Jogador', this._pegarCartas()));
+    console.log(this.jogadores[0].cartas);
   }
 
   jogarCarta(carta: Carta) {
@@ -44,11 +45,33 @@ export class AppComponent {
     carta = this.jogadores[1].jogarCarta(carta);
 
     let jogavel: Carta = null;
+    let set;
+    this.jogadores[0].cartas.sort((a, b) => {
+      if (a.valor > b.valor) {
+        set = -1;
+        return -1;
+      } else if (a.valor == b.valor) {
+        set = 0;
+        return 0;
+      } else {
+        set = 1;
+        return 1;
+      }
+    });
+    
+    let verificaBaralho = this.jogadores[0].cartas;  
     this.jogadores[0].cartas.forEach(el => {
       if (carta.valor < el.valor) {
         jogavel = el;
       } else if (!jogavel) {
-        jogavel = el;
+        verificaBaralho.map(sel => {
+          if (el.valor < sel.valor) {
+            jogavel = el;
+          } else {
+            console.log(el);
+            
+          }
+        });
       }
     });
 
@@ -66,6 +89,12 @@ export class AppComponent {
       this.placar.ja++;
     } else {
       this.empate = true;
+    }
+
+    // if de empate na primeira carta
+    if (this.empate && (this.placar.ia == 0 && this.placar.ja == 0) ) {
+      this.placar.ia++;
+      this.placar.ja++;
     }
 
     // if para pontuar caso haja empate, no caso pontua o que fez o primeiro ponto
